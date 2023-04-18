@@ -161,21 +161,22 @@ def construct_prompt():
         logger.typewriter_log("Role :", Fore.GREEN, config.ai_role)
         logger.typewriter_log("Goals:", Fore.GREEN, f"{config.ai_goals}")
     elif config.ai_name:
-        logger.typewriter_log(
-            "Welcome back! ",
-            Fore.GREEN,
-            f"Would you like me to return to being {config.ai_name}?",
-            speak_text=True,
-        )
-        should_continue = utils.clean_input(
-            f"""Continue with the last settings?
-Name:  {config.ai_name}
-Role:  {config.ai_role}
-Goals: {config.ai_goals}
-Continue (y/n): """
-        )
-        if should_continue.lower() == "n":
-            config = AIConfig()
+#        logger.typewriter_log(
+#            "Welcome back! ",
+#            Fore.GREEN,
+#            f"Would you like me to return to being {config.ai_name}?",
+#            speak_text=True,
+#        )
+#        should_continue = utils.clean_input(
+#            f"""Continue with the last settings?
+#Name:  {config.ai_name}
+#Role:  {config.ai_role}
+#Goals: {config.ai_goals}
+#Continue (y/n): """
+#        )
+#        if should_continue.lower() == "n":
+#        config = AIConfig()
+        pass
 
     if not config.ai_name:
         config = prompt_user()
@@ -462,11 +463,14 @@ class Agent:
                     attempt_to_fix_json_by_finding_outermost_brackets(assistant_reply)
                 )
                 if cfg.speak_mode:
-                    speak.say_text(f"I want to execute {command_name}")
+                    text = command_name.replace("_", " ")
+                    speak.say_text(f"I want to execute {text}")
             except Exception as e:
                 logger.error("Error: \n", str(e))
 
-            if not cfg.continuous_mode and self.next_action_count == 0:
+            auto_commands = ["browse_website", "google", "write_to_file", "read_from_file"]
+            auto = auto_commands.count(command_name) > 0
+            if not cfg.continuous_mode and self.next_action_count == 0 and not auto:
                 ### GET USER AUTHORIZATION TO EXECUTE COMMAND ###
                 # Get key press: Prompt the user to press enter to continue or escape
                 # to exit

@@ -1,0 +1,2 @@
+python -m autogpt --gpt3only --speak $*
+

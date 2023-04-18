@@ -63,7 +63,7 @@ def eleven_labs_speech(text, voice_index=0):
 
 def brian_speech(text):
     """Speak text using Brian with the streamelements API"""
-    tts_url = f"https://api.streamelements.com/kappa/v2/speech?voice=Brian&text={text}"
+    tts_url = f"https://api.streamelements.com/kappa/v2/speech?voice=Brian&speed=1.2&text={text}"
     response = requests.get(tts_url)
 
     if response.status_code == 200:

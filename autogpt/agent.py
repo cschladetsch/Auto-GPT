@@ -81,7 +81,11 @@ class Agent:
                     attempt_to_fix_json_by_finding_outermost_brackets(assistant_reply)
                 )
                 if cfg.speak_mode:
-                    say_text(f"I want to execute {command_name}")
+                    text = command_name
+                    text = text.replace("_", " ")
+                    print("----------------------------------------------------------")
+                    print(f"*** {text}")
+                    say_text(f"I want to execute {text}")
             except Exception as e:
                 logger.error("Error: \n", str(e))
 
