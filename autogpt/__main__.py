@@ -468,7 +468,16 @@ class Agent:
             except Exception as e:
                 logger.error("Error: \n", str(e))
 
-            auto_commands = ["browse_website", "google", "write_to_file", "read_from_file"]
+            auto_commands = [
+                "browse_website", 
+                "google", 
+                "write_to_file", 
+                "read_from_file", 
+                "do_nothing", 
+                "read_file", 
+                "write_file", 
+                "execute_shell"
+            ]
             auto = auto_commands.count(command_name) > 0
             if not cfg.continuous_mode and self.next_action_count == 0 and not auto:
                 ### GET USER AUTHORIZATION TO EXECUTE COMMAND ###
