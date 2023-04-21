@@ -472,8 +472,7 @@ class Agent:
                 "browse_website", 
                 "google", 
                 "write_to_file", 
-                "read_from_file", 
-                "do_nothing", 
+                "read_from_file",  
                 "read_file", 
                 "write_file", 
                 "execute_shell"
